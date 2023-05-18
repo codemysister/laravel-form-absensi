@@ -20,12 +20,12 @@ Route::prefix('admin')->group(function(){
     // Auth
     Route::get('/login', function(){
         return view('admin.login');
-    });
+    })->middleware('guest');
 
     // Master Data
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
-    });
+    })->middleware('auth');
 
 });
 
