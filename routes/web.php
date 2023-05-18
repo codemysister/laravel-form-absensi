@@ -23,8 +23,8 @@ Route::prefix('admin')->group(function(){
     })->middleware('guest');
 
     // Master Data
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+    Route::get('/acara', function () {
+        return view('admin.acara');
     })->middleware('auth');
 
 });
