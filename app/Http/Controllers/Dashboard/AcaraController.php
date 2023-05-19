@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class AcaraController extends Controller
 {
     public function index(AcaraDataTable $dataTable){
-        return $dataTable->render('admin.acara');
+        return $dataTable->render('admin.acara.acara');
     }
 }
