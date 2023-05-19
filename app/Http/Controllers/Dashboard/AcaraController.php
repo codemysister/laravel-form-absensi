@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\DataTables\AcaraDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AcaraRequest;
 use Illuminate\Http\Request;
 
 class AcaraController extends Controller
@@ -34,7 +35,7 @@ class AcaraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AcaraRequest $request)
     {
         //
     }
