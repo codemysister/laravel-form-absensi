@@ -4,7 +4,7 @@
 
 <div  x-data="{ mediaIsOnline: false }" class="max-w-2xl mx-auto my-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <h1 class=" text-xl mb-7">Tambah Acara</h1>
-    <form action="{{route('acara.create')}}" method="POST">
+    <form action="{{route('acara.store')}}" method="POST">
         @csrf
         <div class="mb-4">
                 <label for="judul" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Judul</label>
