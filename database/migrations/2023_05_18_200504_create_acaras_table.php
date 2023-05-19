@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('acaras', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
+            $table->timestamp('tanggal_pelaksanaan');
             $table->string('tempat');
             $table->string('media');
             $table->string('link')->nullable();
