@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AcaraRequest;
 use App\Models\Acara;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class AcaraController extends Controller
 {
@@ -39,7 +41,7 @@ class AcaraController extends Controller
     public function store(AcaraRequest $request)
     {
 
-        Acara::create([
+        $acara = Acara::create([
             'judul' => $request->judul,
             'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
             'tempat' => $request->tempat,
@@ -51,7 +53,14 @@ class AcaraController extends Controller
             'berakhir' => $request->berakhir
         ]);
 
-        return redirect()->route('acara.index');
+        if($acara instanceof Acara){
+            Alert::success('Success', 'Data berhasil ditambahkan!');
+            return redirect()->route('acara.index');
+        }
+
+        Alert::error('Error', 'Gagal menambah data');
+
+        return back();
     }
 
     /**

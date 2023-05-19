@@ -35,6 +35,8 @@
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/sass/app.scss'])
+
+
   </head>
 
   <body class="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
@@ -117,7 +119,7 @@
         </div>
       </div>
     </div>
-
+    @include('sweetalert::alert')
     @stack('scripts')
   </body>
   <!-- plugin for charts  -->
