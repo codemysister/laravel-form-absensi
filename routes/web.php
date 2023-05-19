@@ -25,9 +25,6 @@ Route::prefix('admin')->group(function(){
     })->middleware('guest');
 
     // Master Data
-    Route::get('/acara', [AcaraController::class, 'index'])->middleware('auth');
+    Route::resource('acara', AcaraController::class)->middleware('auth');
 
 });
-
-Route::get('/users', [UsersController::class, 'index'])->name('users.index');
-
