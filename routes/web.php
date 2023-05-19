@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AcaraController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,9 +25,9 @@ Route::prefix('admin')->group(function(){
     })->middleware('guest');
 
     // Master Data
-    Route::get('/acara', function () {
-        return view('admin.acara');
-    })->middleware('auth');
+    Route::get('/acara', [AcaraController::class, 'index'])->middleware('auth');
 
 });
+
+Route::get('/users', [UsersController::class, 'index'])->name('users.index');
 

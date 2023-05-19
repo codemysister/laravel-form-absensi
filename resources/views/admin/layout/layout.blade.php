@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/sass/app.scss'])
   </head>
 
   <body class="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
@@ -118,6 +118,7 @@
       </div>
     </div>
 
+    @stack('scripts')
   </body>
   <!-- plugin for charts  -->
   <script src="{{asset('assets/js/plugins/chartjs.min.js')}}" async></script>
