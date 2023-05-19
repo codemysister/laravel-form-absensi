@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('link')->nullable();
             $table->string('id_meeting')->nullable();
             $table->string('password')->nullable();
-            $table->time('mulai')->nullable();
-            $table->time('berakhir')->nullable();
+            $table->time('mulai');
+            $table->time('berakhir');
             $table->timestamps();
         });
     }

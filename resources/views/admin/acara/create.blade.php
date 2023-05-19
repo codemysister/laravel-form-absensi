@@ -39,6 +39,17 @@
         </div>
 
         <div class="mb-4 flex gap-4 justify-center">
+            <div class="w-1/2" >
+                <label for="mulai" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mulai</label>
+                <input type="time" id="mulai" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="mulai" required>
+            </div>
+            <div class="w-1/2">
+                <label for="berakhir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berakhir</label>
+                <input type="time" id="berakhir" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="berakhir" required>
+            </div>
+        </div>
+
+        <div class="mb-4 flex gap-4 justify-center">
             <div class="w-1/2">
                 <label for="media" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Media</label>
                 <select required x-on:change="$event.target.value == 'zoom' || $event.target.value == 'gmeet' ? mediaIsOnline = true : mediaIsOnline = false" id="media" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="media">
@@ -70,16 +81,7 @@
             </div>
         </div>
 
-        <div class="mb-4 flex gap-4 justify-center" x-show="mediaIsOnline">
-            <div class="w-1/2" >
-                <label for="mulai" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mulai</label>
-                <input type="time" id="mulai" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="mulai">
-            </div>
-            <div class="w-1/2">
-                <label for="berakhir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berakhir</label>
-                <input type="time" id="berakhir" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="berakhir">
-            </div>
-        </div>
+
 
 
         <div class="mx-auto text-center">

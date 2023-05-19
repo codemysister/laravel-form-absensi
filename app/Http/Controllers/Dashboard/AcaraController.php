@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\DataTables\AcaraDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AcaraRequest;
+use App\Models\Acara;
 use Illuminate\Http\Request;
 
 class AcaraController extends Controller
@@ -37,7 +38,20 @@ class AcaraController extends Controller
      */
     public function store(AcaraRequest $request)
     {
-        //
+
+        Acara::create([
+            'judul' => $request->judul,
+            'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
+            'tempat' => $request->tempat,
+            'media' => $request->media,
+            'link' => $request->link,
+            'id_meeting' => $request->id_meeting,
+            'password' => $request->password,
+            'mulai' => $request->mulai,
+            'berakhir' => $request->berakhir
+        ]);
+
+        return redirect()->route('acara.index');
     }
 
     /**

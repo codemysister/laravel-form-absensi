@@ -27,7 +27,9 @@ class AcaraRequest extends FormRequest
             'judul' => ['required'],
             'tanggal_pelaksanaan' => ['date', 'required'],
             'tempat' => ['required'],
-            'media' => ['required']
+            'media' => ['required'],
+            'mulai' => ['required', 'date'],
+            'berakhir' => ['required', 'date']
         ];
     }
 }
