@@ -25,7 +25,7 @@ class AcaraController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.acara.create');
     }
 
     /**
