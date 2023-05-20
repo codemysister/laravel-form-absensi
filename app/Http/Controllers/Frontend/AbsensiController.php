@@ -57,7 +57,9 @@ class AbsensiController extends Controller
     {
         $acara = Acara::find($id);
         if($request->ajax()){
-            return DataTables::of(Peserta::query())
+            return DataTables::of(Peserta::join('acaras', 'acaras.id', '=', 'pesertas.acara_id')
+            ->select('pesertas.*', 'acaras.*')
+            ->get())
             ->make(true);
         }
 
