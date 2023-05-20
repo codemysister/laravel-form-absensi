@@ -3,28 +3,28 @@
 @section('content')
 
     <div class="container">
-        {{-- <a href="{{route('acara.create')}}" class="">
+        <a href="{{route('acara.create')}}" class="">
             <button class="p-2 my-2 bg-blue-500 rounded text-white">Tambah</button>
         </a>
         <div class="card">
             <div class="card-header">Kelola Acara</div>
             <div class="card-body">
-                {{ $dataTable->table() }}
-            </div>
-        </div> --}}
-        <table id="myTable" class="table  table-stripped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Judul</th>
-                    <th>Tanggal</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
+                <table id="myTable" class="table  table-stripped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Judul</th>
+                            <th>Tanggal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 @endsection
 
