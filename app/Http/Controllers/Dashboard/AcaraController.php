@@ -102,9 +102,29 @@ class AcaraController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function update(Request $request, Acara $acara)
+    public function update(AcaraRequest $request, Acara $acara)
     {
-        dd($acara);
+        // dd($request->all());
+        $action = $acara->update([
+            'judul' => $request->judul,
+            'tanggal_pelaksanaan' => $request->tanggal_pelaksanaan,
+            'tempat' => $request->tempat,
+            'media' => $request->media,
+            'link' => $request->link,
+            'id_meeting' => $request->id_meeting,
+            'password' => $request->password,
+            'mulai' => $request->mulai,
+            'berakhir' => $request->berakhir
+        ]);
+
+        if($action){
+            Alert::success('Success', 'Data berhasil diupdate!');
+            return redirect()->route('acara.index');
+        }
+
+        Alert::error('Error', 'Gagal mengupdate data');
+
+        return back();
     }
 
     /**
