@@ -2,7 +2,8 @@
 @section('content')
 
 
-<div  x-data="{ mediaIsOnline: false}" class="max-w-2xl mx-auto my-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+<div  x-data="{ mediaIsOnline: '{{$acara->media != 'offline' ? true : false}}'}" class="max-w-2xl mx-auto my-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
 
     <h1 class=" text-xl mb-7">Edit Acara</h1>
     <form action="{{route('acara.update', $acara->id)}}" method="POST">
@@ -59,7 +60,7 @@
                     @endphp
 
                     @foreach ($media as $key => $value)
-                    <option selected="{{$key == $acara->media ? true : false}}" value="{{$key}}">{{$value}}</option>
+                    <option {{$key == $acara->media ? 'selected' : ''}} value="{{$key}}">{{$value}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('media'))
