@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Acara;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AbsensiController extends Controller
 {
@@ -15,7 +17,10 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        $acaras = Acara::paginate(8);
+        $acaras = DB::table('acaras')
+                ->whereDate('tanggal_pelaksanaan', Carbon::now()->locale('id')->isoFormat('YYYY-MM-DD'))
+                ->paginate(8);
+
         return view('users.index', compact('acaras'));
     }
 
@@ -46,9 +51,9 @@ class AbsensiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Acara $acara)
     {
-        //
+        return view('users.form_absensi');
     }
 
     /**
