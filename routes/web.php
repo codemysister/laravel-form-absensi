@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Dashboard\AcaraController;
+use App\Http\Controllers\Frontend\AbsensiController;
+use App\Http\Controllers\Frontend\AcaraController as FrontendAcaraController;
 use App\Http\Controllers\UsersController;
 use App\Models\Acara;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +19,7 @@ use Yajra\DataTables\Facades\DataTables;
 |
 */
 
+Route::get('/', [AbsensiController::class, 'index']);
 
 // ADMIN DASHBOARD
 Route::prefix('admin')->group(function(){
