@@ -19,17 +19,18 @@ class AcaraController extends Controller
     */
     public function index(Request $request)
     {
+        $title = 'Delete User!';
+        $text = "Apakah anda yakin?";
+        confirmDelete($title, $text);
+
         if($request->ajax()){
             return DataTables::of(Acara::query())
             ->addColumn('action', function($model){
-                return '<a class="p-2 rounded bg-blue-500 text-white no-underline" href="'.route('acara.edit', $model->id).'">Edit</a>';
+                return view('admin.acara.action_button', ['model' => $model])->render();
             })
             ->make(true);
         }
-        // $acaras = DataTables::of(Acara::query())->make(true);
-        $acaras = Acara::get();
-        // return $dataTable->render('admin.acara.acara');
-        return view('admin.acara.acara', compact('acaras'));
+        return view('admin.acara.acara');
     }
 
     /**
@@ -50,6 +51,7 @@ class AcaraController extends Controller
     */
     public function store(AcaraRequest $request)
     {
+
 
         $acara = Acara::create([
             'judul' => $request->judul,
@@ -133,8 +135,18 @@ class AcaraController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function destroy($id)
+    public function destroy(Acara $acara)
     {
-        //
+
+        $action = $acara->delete();
+
+        if($action){
+            Alert::success('Success', 'Data berhasil dihapus!');
+            return redirect()->route('acara.index');
+        }
+
+        Alert::error('Error', 'Gagal menghapus data');
+
+        return back();
     }
 }
