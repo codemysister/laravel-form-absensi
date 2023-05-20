@@ -163,13 +163,18 @@
     <script>
 
         let id = "{!!$acara->id!!}";
-        console.log(id);
         let table = new DataTable('#myTable', {
             processing: true,
             serverSide: true,
             ajax: "{{ url('absensi/id') }}",
             columns: [
-            {data: 'id', name: 'id'},
+                {
+            data: 'no',
+            name: 'no',
+            render: function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }
+        },
             {data: 'nama', name: 'nama'},
             {data: 'nid', name: 'nid'},
             {data: 'instansi', name: 'instansi'},
