@@ -20,6 +20,7 @@ use Yajra\DataTables\Facades\DataTables;
 */
 
 Route::get('/', [AbsensiController::class, 'index']);
+Route::get('/absensi/ajax/{id}', [AbsensiController::class, 'fetch'])->name('absensi.ajax');
 Route::get('/absensi/{id}', [AbsensiController::class, 'show'])->name('absensi.fetch');
 Route::post('/absensi/{id}', [AbsensiController::class, 'store'])->name('absensi.store');
 

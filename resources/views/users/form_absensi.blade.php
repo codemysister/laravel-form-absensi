@@ -140,7 +140,7 @@
             <table id="myTable" class="table  table-stripped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+
                         <th>Nama</th>
                         <th>NID</th>
                         <th>Instansi</th>
@@ -163,25 +163,20 @@
     <script>
 
         let id = "{!!$acara->id!!}";
+        $(function() {
         let table = new DataTable('#myTable', {
             processing: true,
             serverSide: true,
-            ajax: "{{ url('absensi/id') }}",
-            columns: [
-                {
-            data: 'no',
-            name: 'no',
-            render: function (data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1;
-            }
-        },
-            {data: 'nama', name: 'nama'},
-            {data: 'nid', name: 'nid'},
-            {data: 'instansi', name: 'instansi'},
-            {data: 'divisi', name: 'divisi'},
-            {data: 'jabatan', name: 'jabatan'}
+            ajax: "{{ url('absensi/ajax/{id}') }}".replace('{id}', id),
+            columns:[
+            {data: 'nama', name: 'pesertas.nama'},
+            {data: 'nid', name: 'pesertas.nid'},
+            {data: 'instansi', name: 'pesertas.instansi'},
+            {data: 'divisi', name: 'pesertas.divisi'},
+            {data: 'jabatan', name: 'pesertas.jabatan'}
             ]
         });
+    });
 
         function inputAgency() {
             return {

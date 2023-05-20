@@ -33,9 +33,16 @@ class AbsensiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function fetch($id)
     {
-        //
+        $pesertas = DB::table('pesertas')
+        ->join('acaras', 'acaras.id', '=', 'pesertas.acara_id')
+        ->select('pesertas.nama', 'pesertas.acara_id', 'pesertas.nid', 'pesertas.instansi', 'pesertas.jabatan', 'pesertas.divisi')
+        ->where('pesertas.acara_id', $id);
+
+
+            return (DataTables::of($pesertas)
+            ->make(true));
     }
 
     /**
@@ -76,13 +83,8 @@ class AbsensiController extends Controller
      */
     public function show(Request $request, $id)
     {
+
         $acara = Acara::find($id);
-        if($request->ajax()){
-            return DataTables::of(Peserta::join('acaras', 'acaras.id', '=', 'pesertas.acara_id')
-            ->select('pesertas.*', 'acaras.*')
-            ->get())
-            ->make(true);
-        }
 
         return view('users.form_absensi', compact('acara'));
     }
