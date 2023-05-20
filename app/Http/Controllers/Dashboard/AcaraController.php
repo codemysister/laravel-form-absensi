@@ -90,9 +90,9 @@ class AcaraController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function edit($id)
+    public function edit(Acara $acara)
     {
-        dd('oke');
+        return view('admin.acara.edit', compact('acara'));
     }
 
     /**
