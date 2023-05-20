@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('acara_id')->constrained()->onDelete('cascade');
             $table->string('nama');
             $table->string('nid');
-            $table->string('intansi');
+            $table->string('instansi');
             $table->string('divisi');
             $table->string('jabatan');
             $table->string('media');
