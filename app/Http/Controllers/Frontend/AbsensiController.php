@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Acara;
+use App\Models\Peserta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class AbsensiController extends Controller
 {
@@ -51,9 +53,15 @@ class AbsensiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Acara $acara)
+    public function show(Request $request, $id)
     {
-        return view('users.form_absensi');
+        $acara = Acara::find($id);
+        if($request->ajax()){
+            return DataTables::of(Peserta::query())
+            ->make(true);
+        }
+
+        return view('users.form_absensi', compact('acara'));
     }
 
     /**

@@ -20,6 +20,7 @@ use Yajra\DataTables\Facades\DataTables;
 */
 
 Route::get('/', [AbsensiController::class, 'index']);
+Route::get('/absensi/{id}', [AbsensiController::class, 'show'])->name('absensi.fetch');
 
 // ADMIN DASHBOARD
 Route::prefix('admin')->group(function(){
