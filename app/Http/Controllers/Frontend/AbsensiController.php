@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AbsensiRequest;
 use App\Models\Acara;
 use App\Models\Peserta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class AbsensiController extends Controller
@@ -42,9 +44,28 @@ class AbsensiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AbsensiRequest $request)
     {
-        //
+        $peserta = Peserta::create([
+            'acara_id' => $request->acara_id,
+            'nama' => $request->nama,
+            'nid' => $request->nid,
+            'instansi' => $request->instansi != "on" ? $request->instansi : $request->instansi_lain,
+            'divisi' => $request->divisi,
+            'jabatan' => $request->jabatan,
+            'media' => $request->media,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp
+        ]);
+
+        if($peserta instanceof Peserta){
+            Alert::success('Success', 'Data berhasil ditambahkan!');
+            return redirect("/absensi/$request->id");
+        }
+
+        Alert::error('Error', 'Gagal menambah data');
+
+        return back();
     }
 
     /**

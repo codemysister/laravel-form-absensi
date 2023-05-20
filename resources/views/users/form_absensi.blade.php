@@ -25,8 +25,9 @@
         <div class="w-[40%] bg-white border border-gray-200 rounded-lg shadow">
             <form action="{{url('absensi/'.$acara->id)}}" method="POST">
                 @csrf
+                <input type="hidden" name="acara_id" value="{{$acara->id}}">
                 <div class="p-3 mb-2 bg-cyan-500 rounded-lg text-white">
-                    <h5 class="text-2xl font-bold mb-2 ">Tes</h5>
+                    <h5 class="text-2xl font-bold mb-2 ">{{$acara->judul}}</h5>
                     <div class="flex gap-5 ">
 
                         <div class="flex gap-3 ">
@@ -94,7 +95,7 @@
                             </div>
                         </div>
 
-                        <input x-show="isOpen()" type="text" id="instansi" class="block w-full p-2 text-gray-900 border mt-4 border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" :value="isOpen() ? '' : '' " name="instansi_lain"  placeholder="Instansi lain">
+                        <input x-show="isOpen()" type="text" class="block w-full p-2 text-gray-900 border mt-4 border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" :value="isOpen() ? '' : '' " name="instansi_lain"  placeholder="Instansi lain">
 
                     </div>
 
@@ -153,6 +154,7 @@
             </table>
         </div>
     </div>
+    @include('sweetalert::alert')
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/r-2.4.1/datatables.min.js"></script>
