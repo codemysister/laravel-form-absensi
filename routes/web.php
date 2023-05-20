@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Dashboard\AcaraController;
 use App\Http\Controllers\UsersController;
+use App\Models\Acara;
 use Illuminate\Support\Facades\Route;
+use Yajra\DataTables\Facades\DataTables;
 
 /*
 |--------------------------------------------------------------------------
