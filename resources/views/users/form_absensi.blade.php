@@ -23,114 +23,117 @@
 
     <div class="flex gap-5 m-10" x-data="inputAgency()">
         <div class="w-[40%] bg-white border border-gray-200 rounded-lg shadow">
-            <div class="p-3 mb-2 bg-cyan-500 rounded-lg text-white">
-                <h5 class="text-2xl font-bold mb-2 ">Tes</h5>
-                <div class="flex gap-5 ">
+            <form action="{{url('absensi/'.$acara->id)}}" method="POST">
+                @csrf
+                <div class="p-3 mb-2 bg-cyan-500 rounded-lg text-white">
+                    <h5 class="text-2xl font-bold mb-2 ">Tes</h5>
+                    <div class="flex gap-5 ">
 
-                    <div class="flex gap-3 ">
-                        <p class=" mb-2 text-sm dark:text-white"><b> Pelaksanaan</b> : 11/05/2022</p>
+                        <div class="flex gap-3 ">
+                            <p class=" mb-2 text-sm dark:text-white"><b> Pelaksanaan</b> : {{Carbon\Carbon::createFromFormat('Y-m-d', $acara->tanggal_pelaksanaan)->format('d/m/Y')}}</p>
 
-                        <span class="text-sm">|</span>
+                            <span class="text-sm">|</span>
 
-                        <p class=" mb-2 text-sm dark:text-white"><b>Waktu</b> : 08.00 - 11.00</p>
-                    </div>
-
-                </div>
-
-                <p class=" mb-2 text-sm dark:text-white"><b>Tempat</b> : PT PLN NP</p>
-
-                <div class="flex gap-5 ">
-
-                    <div class="flex gap-3 ">
-                        <p class=" mb-2 text-sm dark:text-white"><b> Media</b> : Zoom</p>
-
-                        <span class="text-sm">,</span>
-
-                        <p class=" mb-2 text-sm dark:text-white"><b>ID Meeting</b> : -</p>
-
-                        <span class="text-sm">,</span>
-
-                        <p class=" mb-2 text-sm dark:text-white"><b>Password</b> : -</p>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="m-4">
-                <div class="mb-4">
-                    <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                    <input type="text" id="nama" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="nama" required placeholder="Peserta">
-                    @if ($errors->has('nama'))
-                    <div class="text-xs text-red-500">
-                        <strong>{{ $errors->first('nama') }}</strong>
-                    </div>
-                    @endif
-                </div>
-                <div class="mb-4">
-                    <label for="nid" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NID</label>
-                    <input type="text" id="nid" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="nid" required placeholder="NID">
-                    @if ($errors->has('nid'))
-                    <div class="text-xs text-red-500">
-                        <strong>{{ $errors->first('nid') }}</strong>
-                    </div>
-                    @endif
-                </div>
-                <div class="mb-4">
-                    <label for="instansi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Instansi</label>
-                    <div class="flex">
-                        <div class="flex items-center mr-4">
-                            <input x-on:click="close" checked id="inline-radio" type="radio" name="instansi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="PLN Nusantara Power">
-                            <label for="inline-radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">PLN Nusantara Power</label>
+                            <p class=" mb-2 text-sm dark:text-white"><b>Waktu</b> : {{Carbon\Carbon::createFromFormat('H:i:s', $acara->mulai)->format('H.i')}} - {{Carbon\Carbon::createFromFormat('H:i:s', $acara->berakhir)->format('H.i')}}</p>
                         </div>
-                        <div class="flex items-center mr-4">
-                            <input x-on:click="close" id="inline-2-radio" type="radio" value="PLN" name="instansi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="inline-2-radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">PLN</label>
+
+                    </div>
+
+                    <p class=" mb-2 text-sm dark:text-white"><b>Tempat</b> : {{$acara->tempat}}</p>
+
+                    <div class="flex gap-5 ">
+
+                        <div class="flex gap-3 ">
+                            <p class=" mb-2 text-sm dark:text-white"><b> Media</b> : {{$acara->media}}</p>
+
+                            <span class="text-sm">,</span>
+
+                            <p class=" mb-2 text-sm dark:text-white"><b>ID Meeting</b> : {{$acara->id_meeting == "" || $acara->id_meeting == null ? '-' : $acara->id_meeting}}</p>
+
+                            <span class="text-sm">,</span>
+
+                            <p class=" mb-2 text-sm dark:text-white"><b>Password</b> : {{$acara->password == "" || $acara->password == null ? '-' : $acara->password}}</p>
                         </div>
-                        <div class="flex items-center mr-4">
-                            <input id="inline-checked-radio" type="radio" x-on:click="display"  name="instansi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="inline-checked-radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lainnya</label>
+
+                    </div>
+
+                </div>
+                <div class="m-4">
+                    <div class="mb-4">
+                        <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                        <input type="text" id="nama" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="nama" required placeholder="Peserta">
+                        @if ($errors->has('nama'))
+                        <div class="text-xs text-red-500">
+                            <strong>{{ $errors->first('nama') }}</strong>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="mb-4">
+                        <label for="nid" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NID</label>
+                        <input type="text" id="nid" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="nid" required placeholder="NID">
+                        @if ($errors->has('nid'))
+                        <div class="text-xs text-red-500">
+                            <strong>{{ $errors->first('nid') }}</strong>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="mb-4">
+                        <label for="instansi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Instansi</label>
+                        <div class="flex">
+                            <div class="flex items-center mr-4">
+                                <input x-on:click="close" checked id="inline-radio" type="radio" name="instansi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="PLN Nusantara Power">
+                                <label for="inline-radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">PLN Nusantara Power</label>
+                            </div>
+                            <div class="flex items-center mr-4">
+                                <input x-on:click="close" id="inline-2-radio" type="radio" value="PLN" name="instansi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="inline-2-radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">PLN</label>
+                            </div>
+                            <div class="flex items-center mr-4">
+                                <input id="inline-checked-radio" type="radio" x-on:click="display"  name="instansi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="inline-checked-radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lainnya</label>
+                            </div>
+                        </div>
+
+                        <input x-show="isOpen()" type="text" id="instansi" class="block w-full p-2 text-gray-900 border mt-4 border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" :value="isOpen() ? '' : '' " name="instansi_lain"  placeholder="Instansi lain">
+
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex gap-2">
+                            <input type="text" id="divisi" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="divisi" required placeholder="Divisi / Unit">
+                            <input type="text" id="jabatan" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="jabatan" required placeholder="Jabatan">
                         </div>
                     </div>
 
-                    <input x-show="isOpen()" type="text" id="instansi" class="block w-full p-2 text-gray-900 border mt-4 border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="instansi" required placeholder="Instansi lain">
-
-                </div>
-
-                <div class="mb-4">
-                    <div class="flex gap-2">
-                        <input type="text" id="divisi" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="divisi" required placeholder="Divisi / Unit">
-                        <input type="text" id="jabatan" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="jabatan" required placeholder="Jabatan">
+                    <div class="mb-4">
+                        <label for="media" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email / No Handphone (optional)</label>
+                        <div class="flex gap-2">
+                            <input type="email" id="email" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="email" placeholder="e-mail">
+                            <input type="number" id="no_hp" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="no_hp" required placeholder="No.HP">
+                        </div>
                     </div>
-                </div>
 
-                <div class="mb-4">
-                    <label for="media" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email / No Handphone (optional)</label>
-                    <div class="flex gap-2">
-                        <input type="email" id="email" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="email" placeholder="e-mail">
-                        <input type="number" id="no_hp" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="no_hp" required placeholder="No.HP">
+                    <div class="mb-4">
+                        <label for="media" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Media</label>
+                        <select required  id="media" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="media">
+                            <option selected>Pilih</option>
+                            <option value="zoom">Zoom</option>
+                            <option value="gmeet">Gmeet</option>
+                            <option value="offline">Offline</option>
+                        </select>
+                        @if ($errors->has('media'))
+                        <div class="text-xs text-red-500">
+                            <strong>{{ $errors->first('media') }}</strong>
+                        </div>
+                        @endif
                     </div>
+
                 </div>
 
-                <div class="mb-4">
-                    <label for="media" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Media</label>
-                    <select required  id="media" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="media">
-                        <option selected>Pilih</option>
-                        <option value="zoom">Zoom</option>
-                        <option value="gmeet">Gmeet</option>
-                        <option value="offline">Offline</option>
-                    </select>
-                    @if ($errors->has('media'))
-                    <div class="text-xs text-red-500">
-                        <strong>{{ $errors->first('media') }}</strong>
-                    </div>
-                    @endif
+                <div class="mx-auto text-center">
+                    <button type="submit" class="p-2 my-2 bg-cyan-500 rounded text-white">Submit</button>
                 </div>
-
-            </div>
-
-            <div class="mx-auto text-center">
-                <button type="submit" class="p-2 my-2 bg-cyan-500 rounded text-white">Submit</button>
-            </div>
+            </form>
         </div>
         <div class="w-[60%] p-6 bg-white border border-gray-200 rounded-lg shadow">
             <table id="myTable" class="table  table-stripped">
@@ -177,7 +180,7 @@
             return {
                 show: false,
                 display() { this.show = true },
-                close() { this.show = false },
+                close(e) { this.show = false},
                 isOpen() { return this.show === true }
             }
         }
